@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+ class Movie {
+    static generosAceptados = ['acción', 'comedia', 'drama', 'horror', 'crimen', 'romance', 'sci-fi', 'thriller', 'biografia', 'historia'];
+      constructor(id, titulo, director, anioEstreno, paisOrigen, genero, calificación){
+          if (!/^[a-zA-Z]{2}\d{7}$/.test(id)) {
+              throw new Error('ID de IMDB invalida');
+          }
+          if(titulo.length > 100) {
+              throw new Error('El titulo excede los 100 caracteres maximos')
+          }
+          if(director.length > 50) {
+              throw new Error('El nombre del director excede los 50 caracteres maximos')
+          }
+          if(!/^\d{4}$/.test(anioEstreno) && Number(anioEstreno) >= 1900 && Number(anioEstreno) <= new Date().getFullYear()) {
+              throw new Error('Año de estreno invalido')
+          }
+          if (!Array.isArray(paisOrigen) || !paisOrigen.every((e)=> typeof e === "string")) {
+              throw new Error('Pais de origen no valido')
+          }
+          if(!Array.isArray(genero) || !genero.every((e)=> typeof e === "string")) {
+              throw new Error('Genero no valido')
+          }
+          if(!genero.every((genero)=> Movie.generosAceptados.includes(genero))) {
+              throw new Error(`El genero debe ser uno aceptado: ${Movie.generosAceptados}`)
+          }
+          if(typeof calificación !== 'number' || calificación < 0 || calificación > 10) {
+              throw new Error('Calificación invalida')
+          }
+          this.id = id;
+          this.titulo = titulo;
+          this.director = director;
+          this.anioEstreno = anioEstreno;
+          this.paisOrigen = paisOrigen;
+          this.genero = genero;
+          this.calificación = calificación;
+      
+      }
+
+          static obtenerGenerosAceptados() {
+              return Movie.generosAceptados;
+          }
+
+  obtenerFichaTecnica() {
+      return {
+         "Id": this.id,
+         "Titulo": this.titulo,
+         "Director": this.director,
+         "Año de Estreno": this.anioEstreno,
+         "Pais de origen": this.paisOrigen,
+         "Genero": this.genero,
+         "Calificación": this.calificación
+        }
+  }
+}
+
+const pelis = [
+  {
+      'id': 'tt1234567',
+      'titulo': 'The Shawshank Redemption',
+      'director': 'Frank Darabont',
+      'anioEstreno': 1994,
+      'paisOrigen': ['USA'],
+      'genero': ['drama'],
+      'calificación': 9.3
+  },
+  {
+      'id': 'tt1234567',
+      'titulo': 'The Godfather',
+      'director': 'Francis Ford Coppola',
+      'anioEstreno': 1972,
+      'paisOrigen': ['USA'],
+      'genero': ['crimen', 'drama'],
+      'calificación': 9.2
+  },
+  {
+      'id': 'tt1234567',
+      'titulo': "Schindler's List",
+      'director': 'Steven Spielberg',
+      'anioEstreno': 1993,
+      'paisOrigen': ['USA'],
+      'genero': ['biografia', 'drama', 'historia'],
+      'calificación': 8.9
+  }
+];
+
+for(const movie of pelis) {
+try {
+  const result = new Movie(
+    movie["id"],
+    movie["titulo"],
+    movie["director"],
+    movie["anioEstreno"],
+    movie["paisOrigen"],
+    movie["genero"],
+    movie["calificación"]
+  );
+  console.log(result.obtenerFichaTecnica());
+} catch (error) {
+  console.error(error.message);
+}
+}
+
+    </script>
+</body>
+</html>
