@@ -463,6 +463,7 @@ const eliminarDuplicados=(arr=undefined)=>{
     if(arr===undefined) return console.warn("No ingresaste valor alguno");
     if(!(arr instanceof Array)) return console.warn("No ingresaste un array valido");
     if(arr.length===0) return console.warn("El array esta vacio");
+    if(arr.length===1) return console.warn("El arrglo debe tener al menos dos elementos")
     const notNumbers = arr.filter((e)=>typeof e !=="number");
     
     if(notNumbers.length > 0)return console.warn(`Los valores "${notNumbers.join(", ")}" no son un numero`);
@@ -485,6 +486,15 @@ const sacarPromedio=(arr)=>{
       let resultado =  arr.reduce((acumulador, actual) => acumulador + actual) / arr.length;
          return console.info(`El promedio del arreglo de numeros "${arr}" es "${resultado}"`);
         }
+
+        // console.info(
+        //     arr.reduce((total, num, index, arr)=>{
+        //         total += num;
+        //         if(index === arr.length - 1) {
+        //             return `El promedio de ${arr} es ${total / arr.length}}`
+        //         }
+        //     })
+        // )
 
 //         27) Programa una clase llamada Pelicula.
 // La clase recibirá un objeto al momento de instanciarse con los siguentes datos: 
