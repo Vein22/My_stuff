@@ -100,9 +100,9 @@ try {
 }
 console.info(Movie.obtenerGenerosAceptados())
 
-  
+//   -------------------
 
-//  class Movie {
+  class Movie {
     static accepted_genres = ['action', 'comedy', 'drama', 'horror', 'romance', 'sci-fi', 'thriller', 'crime', 'biography', 'history'];
 
     constructor(movie_id, tweet, director, year_of_release, countries_of_origin, genres, rating_on_IMBD) {
