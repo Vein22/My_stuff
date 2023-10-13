@@ -450,7 +450,7 @@ const ascendenteDescendente=(arr=undefined)=>{
 }
 
 // return console.info({
-//     arr,
+//     arr,  //Si el atributo de un objeto se llama igual a la variable que esta recibiendo donde vienen los valores se puede simplificar
 //     asc: arr.map(e=>e).sort(),
 //     desc: arr.map(e=>e).sort().reverse()
 // })
