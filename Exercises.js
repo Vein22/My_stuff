@@ -492,7 +492,9 @@ const sacarPromedio=(arr)=>{
         //         total += num;
         //         if(index === arr.length - 1) {
         //             return `El promedio de ${arr} es ${total / arr.length}}`
-        //         }
+        //       } else {
+        //         return total;
+        //       }
         //     })
         // )
 
