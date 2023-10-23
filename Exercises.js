@@ -620,3 +620,119 @@ const sacarPromedio=(arr)=>{
       console.error(error.message);
     }
     }
+
+// Ordenar de mayor a menor con tres metodos distintos
+
+// const mayorMenor=(numeros)=>{
+//     let menor = Math.min(...numeros)
+//     let mayor = Math.max(...numeros)
+//     return [menor, mayor]
+// }
+
+// let menor = numeros[0];
+//   let mayor = numeros[0];
+
+//   for (let e of numeros) {
+//     if (e < menor) {
+//       menor = e;
+//     }
+//      if (e > mayor) {
+//       mayor = e;
+//     }
+//   }
+
+//   return [mayor, menor];
+// }
+
+// const mayorMenor=(numeros)=>{
+//     let menor = numeros[0]
+//     let mayor = numeros[0]
+//     for(let i=1;i<numeros.length;i++) {
+//         if(numeros[i] > mayor){
+//             mayor = numeros[i]
+//         }
+//         if(numeros[i] < menor){
+//             menor = numeros[i]
+//     }
+// }
+// return [menor, mayor]
+// }
+
+const mayorMenor=(numeros)=>{
+    let ordenado = numeros.sort((a,b)=> a - b)
+    return (`${ordenado[0]}, ${ordenado[ordenado.length - 1]}`)
+}
+console.log(mayorMenor([9, 17, 6, 2, 4]))
+
+// funcion para sumar solo primos de un array con enteros
+
+function esPrimo(num){
+    if ( num < 2) {
+      return false;
+   } for (let i = 2; i < num; i++) {
+     if (num % i === 0) {
+      return false;
+     }
+   }
+     return true;
+}
+function sumarPrimos(numeros){
+   const listaPrimos = numeros.filter((num)=> esPrimo(num))
+   const resultado = listaPrimos.reduce((eA, eS)=> eA + eS)
+   return {resultado,listaPrimos}
+}
+
+console.log(sumarPrimos([1,2,3,4,5,6,7,8,9]))
+
+
+
+// * Completa la función 'sumaTodosPrimos' a continuación.
+// *
+// * La función debe retornar un ENTERO.
+// * La función recibe un ARREGLO DE ENTEROS como parámetro.
+// *
+// * No modifiques nada por fuera del cuerpo de la función.
+// */
+
+// function sumaTodosPrimos(numeros) {
+//    // tu código aquí
+//    function esPrimo(num) {
+//        if(num<2) {
+//            return false
+//        }
+//        for(let i=2;i<=num**0.5;i++) {
+//            if(num%i===0) {
+//                return false
+//            }
+//        }
+//        return true
+//    }
+//    let res=0
+   
+//    for(let n of numeros) {
+//        if(esPrimo(n)) {
+//            res+=n
+//        }
+//    }
+//    return res
+// }
+
+/*Dado un conjunto de enteros de un numero objetivo debes devolver el indice de los dos numeros
+ que suman el objetivo, y no se puede utilizar mas de un bucle, un for maximo */
+
+const input = [9,4,10,3,39,12,1,4,6]
+
+function twoSum(array, target) {
+    const differences = {};
+    for (let i=0;i<array.length;i++) {
+        const n = array[i]
+        if(differences[target - n]) {
+            return [differences[target - n].index, i]
+        }
+        differences[n] = {
+            value: target - n,
+            index: i
+        }
+    }
+    return [];
+}
