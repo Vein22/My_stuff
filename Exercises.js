@@ -684,18 +684,25 @@ function sumarPrimos(numeros){
 
 console.log(sumarPrimos([1,2,3,4,5,6,7,8,9]))
 
-
-
-// * Completa la función 'sumaTodosPrimos' a continuación.
-// *
-// * La función debe retornar un ENTERO.
-// * La función recibe un ARREGLO DE ENTEROS como parámetro.
-// *
-// * No modifiques nada por fuera del cuerpo de la función.
-// */
+// const sumarPrimos = (numeros) => {
+      
+    // const esPrimo = (num) => {
+    //   if(num < 2) {
+    //       return false
+    //   }
+    //   for(let i=2;i<=num**0.5;i++) {
+    //       if(num%i===0) {
+    //           return false
+    //       }
+    //   }
+    //   return true
+    //   };
+//     return numeros.reduce((acc, actual) => {
+//       return esPrimo(actual) ? acc + actual : acc
+//     }, 0);
+//   };
 
 // function sumaTodosPrimos(numeros) {
-//    // tu código aquí
 //    function esPrimo(num) {
 //        if(num<2) {
 //            return false
@@ -735,4 +742,194 @@ function twoSum(array, target) {
         }
     }
     return [];
+}
+
+class Alumno {
+    constructor(nombre, apellido, cohorte, grupoDeAmigos, notasDeCheckpoint) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cohorte = cohorte;
+        this.grupoDeAmigos = grupoDeAmigos;
+        this.notasDeCheckpoint = notasDeCheckpoint;
+    }
+  
+    countAmigos() {
+        return this.grupoDeAmigos.length;
+    }
+  
+    addAmigos(nombre, apellido) {
+        this.grupoDeAmigos.push({nombre, apellido});
+    }
+  
+    getNotas() {
+        return this.notasDeCheckpoint;
+    }
+  
+    addNota(newNote) {
+        this.notasDeCheckpoint.push(newNote);
+    }
+  
+    presentacion() {
+        return `${this.nombre} ${this.apellido} pertenece al cohorte: ${this.cohorte}`;
+    }
+  }
+  
+  // Ejemplo
+  const amigosDeHarry = [{ nombre: "Ron", apellido: "Weasley" }, { nombre: "Hermione", apellido: "Granger" }];
+  const alumno1 = new Alumno("Harry", "Potter", 1, amigosDeHarry, [6, 7, 6, 9]);
+  
+  console.log(alumno1.countAmigos()); 
+  alumno1.addAmigos("Neville","Longbottom");
+  console.log(alumno1.grupoDeAmigos); 
+  console.log(alumno1.getNotas()); 
+  alumno1.addNota(8);
+  console.log(alumno1.notasDeCheckpoint);
+  console.log(alumno1.presentacion()); 
+  
+  class Mascota {
+    constructor(nombre, dueño, actividades) {
+      this.nombre = nombre;
+      this.dueño = dueño;
+      this.actividades = actividades;
+    }
+  
+    getNombre() {
+      return this.nombre;
+    }
+  
+    getDueño() {
+      const dueño = this.dueño;
+      return `${dueño.nombre} ${dueño.apellido}`;
+    }
+  
+    addActividad(actividad, frecuencia) {
+      this.actividades.push({ actividad, frecuencia });
+    }
+  
+    getActividades() {
+      const nombresActividades = this.actividades.map((e) => e.actividad);
+      return nombresActividades;
+    }
+
+    getFrecuencia(actividadBuscada) {
+      const actividadEncontrada = this.actividades.find(
+        (actividad) => actividad.actividad === actividadBuscada
+      );
+      if (actividadEncontrada) {
+        return actividadEncontrada.frecuencia;
+      } else {
+        return "Actividad no encontrada";
+      }
+    }
+  }
+  
+  var actividades = [
+    { actividad: "salir a caminar", frecuencia: "diario" },
+    { actividad: "baño", frecuencia: "mensual" },
+  ];
+  
+  var persona = {
+    nombre: "Nicky",
+    apellido: "Medina",
+  };
+  
+  var toby = new Mascota("Toby", persona, actividades);
+  
+  console.log(toby.getDueño()); // Debería retornar "Nicky Medina"
+  console.log(toby.getNombre()); // Debería retornar "Toby"
+  
+  toby.addActividad("dormir", "cada 4 horas");
+  console.log(toby.getActividades()); // Debería retornar ["salir a caminar", "baño", "dormir"]
+  console.log(toby.getFrecuencia("baño")); // Debería retornar "mensual"
+  
+  //Por cada dia festivo agregas 2 horas extra de trabajo
+
+  const diasFestivos=(year, holidays)=> {
+    let resultado=0;
+    for(const fecha of holidays) {
+      const [month,day] = fecha.split("/").map(Number);
+      const holiday = new Date(year, month-1, day);
+      const weekend = holiday.getDay();
+      if(weekend>=1&&weekend<=5) resultado+=2;
+    }
+    return resultado;
+  }
+
+  console.log(diasFestivos(["2023"],["04/28"]))
+
+  //Dado un array de renos y de una caja de regalos, calcular la cantidad de cajas de regalos que pueden
+  // portar los renos, teniendo en cuenta que el numero de letras de cada regalo equivale a su peso,
+  //de la misma forma con los renos con la diferencia de que se multiplica por 2, siendo este su peso limite.
+  
+  const giftToDelivery=(reindeers, gifts)=> {
+    const pesoRegalos = gifts.reduce((a,b)=>a+b.length,0);
+    const pesoLimite = reindeers.reduce((a,b)=>a+b.length*2,0);
+    const resultado = Math.floor(pesoLimite/pesoRegalos)
+    return resultado;
+  }
+  
+  const packOfGifts = ["book", "doll", "ball"]
+  const reindeers = ["dasher", "dancer"]
+  
+  console.log(giftToDelivery(reindeers,packOfGifts))
+
+  //Dado un array con regalos retonar los mismos "envueltos" con asteriscos en un array, el numero de asteriscos
+  //lo determina el numero de letras mas 2 ej: 
+  /* [
+  "*****\n*cat*\n*****",
+  "******\n*game*\n******",
+  "*******\n*socks*\n*******"
+] */
+
+  const wrapping=(gifts)=> {
+    let resultado=[];
+   for(const g of gifts) {
+    const wrappingLength = g.length+2;
+    const wrapp = "*".repeat(wrappingLength);
+    const wrappingGift = `${wrapp}\n*${g}*\n${wrapp}`
+    resultado.push(wrappingGift)
+   }
+   return resultado;
+  }
+  
+  console.log(wrapping(['cat', 'game', 'socks']))
+
+  // Verifica los si una caja puede entrar en otra fijandose en las dimensiones de las mismas, al finalizar
+  // retorna el resultado.
+  
+  function fitsInOneBox(boxes) {
+    boxes.sort((box1, box2) => {
+        return box1.l - box2.l || box1.w - box2.w || box1.h - box2.h;
+    });
+  
+    for (let i = 0; i < boxes.length - 1; i++) {
+        if (
+            boxes[i].l >= boxes[i + 1].l ||
+            boxes[i].w >= boxes[i + 1].w ||
+            boxes[i].h >= boxes[i + 1].h
+        ) {
+            return false; 
+        }
+    }
+  
+    return true; 
+  }
+  
+  const boxes = [
+    { l: 1, w: 1, h: 1 },
+    { l: 3, w: 3, h: 3 },
+    { l: 2, w: 2, h: 2 }
+  ]
+  
+  console.log(fitsInOneBox(boxes))
+
+// Otras formas de convertir de binario a decimal y viceversa:
+
+  const binarioADecimal=(num)=>{
+  return parseInt(num,2);
+}
+
+const decimalABinario=(num)=>{
+let entero = parseInt(Math.abs(num),10);
+return entero.toString(2);
 }
